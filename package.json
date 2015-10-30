@@ -1,0 +1,30 @@
+{
+  "name": "style-guide",
+  "version": "0.1.0",
+  "description": "Style Guide Generator",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "iAmNathanJ/style-guide"
+  },
+  "main": "index.js",
+  "scripts": {
+    "compile-module": "babel index.es6 -o index.js",
+    "compile-test": "babel test/test.es6 -o test/test.js -s inline",
+    "pretest": "npm run compile-module && npm run compile-test",
+    "test": "tape test/test.js | node_modules/.bin/tap-spec",
+    "prepublish": "npm run compile-module",
+    "ci": "npm test"
+  },
+  "author": {
+    "name": "Nathan Jacobs",
+    "email": "hello@iamnathanj.com",
+    "url": "http://iamnathanj.com"
+  },
+  "devDependencies": {
+    "babel": "^5.8.29",
+    "file-pluck": "^0.3.1",
+    "tap-spec": "^4.1.0",
+    "tape": "^4.2.2"
+  }
+}
