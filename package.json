@@ -10,7 +10,7 @@
   "main": "index.js",
   "scripts": {
     "compile-module": "babel index.es6 -o index.js",
-    "compile-test": "babel test/test.es6 -o test/test.js -s inline",
+    "compile-test": "babel test/test.es6 -o test/test.js",
     "pretest": "npm run compile-module && npm run compile-test",
     "test": "tape test/test.js | node_modules/.bin/tap-spec",
     "prepublish": "npm run compile-module",

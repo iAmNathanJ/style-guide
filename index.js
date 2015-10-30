@@ -3,28 +3,22 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-exports['default'] = styleGuide;
 
-function styleGuide() {
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-  var startOfStyle = '/***',
-      endOfStyle = '***/';
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError('Cannot destructure undefined'); }
 
-  return {
+var _filePluck = require('file-pluck');
 
-    pluckStyle: function pluckStyle(str) {
+var _filePluck2 = _interopRequireDefault(_filePluck);
 
-      // get first instance of '/***'
-      var start = str.indexOf(startOfStyle) + 4;
+exports['default'] = function () {
+  var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-      // get first instance of '***/'
-      var end = str.indexOf(endOfStyle) - 4;
+  _objectDestructuringEmpty(_ref);
 
-      return str.substr(start, end).trim();
-    }
-
-  };
-}
+  return {};
+};
 
 ;
 module.exports = exports['default'];

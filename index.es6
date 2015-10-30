@@ -1,18 +1,9 @@
-export default function styleGuide({
-  
-  startOfStyle = '/***',
-  endOfStyle = '***/'
+import filePluck from 'file-pluck';
+
+export default function({
   
   } = {}) {
 
-  return {
-
-    pluckStyle(str) {
-      var start = str.indexOf(startOfStyle) + startOfStyle.length
-        , end   = str.indexOf(endOfStyle) - endOfStyle.length;
-      return str.substr(start, end).trim();
-    }
-  
-  };
+  return {};
 
 };
