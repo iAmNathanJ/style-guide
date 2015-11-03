@@ -17,7 +17,52 @@ exports['default'] = function () {
 
   _objectDestructuringEmpty(_ref);
 
-  return {};
+  var sections = {};
+
+  // Module
+  return {
+
+    createSection: function createSection() {
+      var _ref2 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+      var _ref2$name = _ref2.name;
+      var name = _ref2$name === undefined ? null : _ref2$name;
+      var _ref2$srcFiles = _ref2.srcFiles;
+      var srcFiles = _ref2$srcFiles === undefined ? null : _ref2$srcFiles;
+      var _ref2$delimiters = _ref2.delimiters;
+      var delimiters = _ref2$delimiters === undefined ? {
+        opening: '/***',
+        closing: '***/',
+        valueOpening: '{',
+        valueClosing: '}',
+        keyValueSeparator: '---'
+      } : _ref2$delimiters;
+
+      if (!name) return new Error('No name set on createSection');
+      if (!srcFiles) return new Error('No source file(s) specified on createSection');
+
+      var p = (0, _filePluck2['default'])(delimiters);
+      var getSnippets = p.pluckFile(srcFiles);
+
+      return new Promise(function (resolve, reject) {
+        getSnippets.then(function (snippets) {
+          sections[name] = p.pairUp(snippets);
+          resolve(sections[name]);
+        })['catch'](function (e) {
+          return reject(e);
+        });
+      });
+    },
+
+    getSection: function getSection(name) {
+      return sections[name];
+    },
+
+    getAllSections: function getAllSections() {
+      return sections;
+    }
+
+  };
 };
 
 ;

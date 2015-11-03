@@ -10,3 +10,50 @@ test('style-guide should be a thing', t => {
   t.end();
 
 });
+
+test('style-guide createSection', t => {
+
+  t.plan(4);
+
+  let guide = styleGuide();
+
+  t.equal(typeof guide.createSection, 'function', 'createSection is a function');
+
+  // Create first section
+  guide.createSection({
+    name: 'Base Styles',
+    srcFiles: 'test/main.css'
+  
+  }).then(section => {
+    t.looseEqual(section, [{name: 'First Style', usedFor: 'Stuff'}]);
+  
+  }).catch(e => t.fail(e));
+
+  
+  // Create second section
+  guide.createSection({
+    name: 'Second Styles',
+    srcFiles: 'test/second.css'
+  
+  }).then(section => {
+    t.looseEqual(section, [{name: 'Second Style', usedFor: 'Other Stuff'}]);
+  
+  }).catch(e => t.fail(e));
+
+
+  // Create third section with custom delimiters
+  guide.createSection({
+    name: 'HTML Documentation',
+    srcFiles: 'test/index.html',
+    delimiters: {
+      opening: '<!-- DOCS',
+      closing: '/DOCS -->',
+      valueOpening: '->',
+      valueClosing: '\n\n',
+    }
+  }).then(section => {
+    t.looseEqual(section, [{name: 'HTML Thing', about: 'Description'}]);
+  
+  }).catch(e => t.fail(e));
+
+});
