@@ -20,7 +20,7 @@ var _2 = _interopRequireDefault(_);
 
 (0, _tape2['default'])('style-guide createSection', function (t) {
 
-  t.plan(4);
+  t.plan(5);
 
   var guide = (0, _2['default'])();
 
@@ -48,7 +48,18 @@ var _2 = _interopRequireDefault(_);
     return t.fail(e);
   });
 
-  // Create third section with custom delimiters
+  // Create third section using glob
+  guide.createSection({
+    name: 'Glob',
+    srcFiles: 'test/*.css'
+
+  }).then(function (section) {
+    t.looseEqual(section, [{ name: 'First Style', usedFor: 'Stuff' }, { name: 'Second Style', usedFor: 'Other Stuff' }]);
+  })['catch'](function (e) {
+    return t.fail(e);
+  });
+
+  // Create fourth section with custom delimiters
   guide.createSection({
     name: 'HTML Documentation',
     srcFiles: 'test/index.html',
@@ -59,7 +70,6 @@ var _2 = _interopRequireDefault(_);
       valueClosing: '\n\n'
     }
   }).then(function (section) {
-    console.log(section);
     t.looseEqual(section, [{ name: 'HTML Thing', about: 'Description' }]);
   })['catch'](function (e) {
     return t.fail(e);

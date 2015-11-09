@@ -12,6 +12,20 @@ var _filePluck = require('file-pluck');
 
 var _filePluck2 = _interopRequireDefault(_filePluck);
 
+var _glob = require('glob');
+
+var _glob2 = _interopRequireDefault(_glob);
+
+// Utility - Get promise(glob)
+var findFiles = function findFiles(filePattern) {
+  return new Promise(function (resolve, reject) {
+    (0, _glob2['default'])(filePattern, {}, function (err, filesArray) {
+      if (err) reject(err);
+      resolve(filesArray);
+    });
+  });
+};
+
 exports['default'] = function () {
   var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
@@ -30,22 +44,24 @@ exports['default'] = function () {
       var _ref2$srcFiles = _ref2.srcFiles;
       var srcFiles = _ref2$srcFiles === undefined ? null : _ref2$srcFiles;
       var _ref2$delimiters = _ref2.delimiters;
-      var delimiters = _ref2$delimiters === undefined ? {
+      var // Glob
+
+      delimiters = _ref2$delimiters === undefined ? {
         opening: '/***',
         closing: '***/',
         valueOpening: '{',
-        valueClosing: '}',
-        keyValueSeparator: '---'
+        valueClosing: '}'
       } : _ref2$delimiters;
 
       if (!name) return new Error('No name set on createSection');
       if (!srcFiles) return new Error('No source file(s) specified on createSection');
 
       var p = (0, _filePluck2['default'])(delimiters);
-      var getSnippets = p.pluckFile(srcFiles);
 
       return new Promise(function (resolve, reject) {
-        getSnippets.then(function (snippets) {
+        findFiles(srcFiles).then(function (files) {
+          return p.pluckFiles(files);
+        }).then(function (snippets) {
           sections[name] = p.pairUp(snippets);
           resolve(sections[name]);
         })['catch'](function (e) {

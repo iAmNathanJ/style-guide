@@ -1,25 +1,35 @@
 import filePluck from 'file-pluck';
+import glob from 'glob';
+
+// Utility - Get promise(glob)
+let findFiles = (filePattern) => {
+  return new Promise((resolve, reject) => {
+    glob(filePattern, {}, (err, filesArray) => {
+      if(err) reject(err);
+      resolve(filesArray);
+    });
+  });
+};
 
 export default function({
   
-  } = {}) {
+} = {}) {
 
   let sections = {};
 
   // Module 
-  return {  
+  return {
 
     createSection({
 
       name = null,
-      srcFiles = null,
+      srcFiles = null, // Glob
 
       delimiters = {
         opening: '/***',
         closing: '***/',
         valueOpening: '{',
-        valueClosing: '}',
-        keyValueSeparator: '---'
+        valueClosing: '}'
       }
 
     } = {}) {
@@ -28,16 +38,16 @@ export default function({
       if(!srcFiles) return new Error('No source file(s) specified on createSection');
 
       let p = filePluck(delimiters);
-      let getSnippets = p.pluckFile(srcFiles);
       
       return new Promise((resolve, reject) => {
-        getSnippets.then(snippets => {
+        findFiles(srcFiles)
+        .then(files => p.pluckFiles(files) )
+        .then(snippets => {
           sections[name] = p.pairUp(snippets);
           resolve(sections[name]);
         })
         .catch(e => reject(e));
       });
-
     },
 
     getSection(name) {

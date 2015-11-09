@@ -1,7 +1,6 @@
 import test from 'tape';
 import styleGuide from '../';
 
-
 test('style-guide should be a thing', t => {
 
   let guide = styleGuide();
@@ -13,7 +12,7 @@ test('style-guide should be a thing', t => {
 
 test('style-guide createSection', t => {
 
-  t.plan(4);
+  t.plan(5);
 
   let guide = styleGuide();
 
@@ -41,7 +40,18 @@ test('style-guide createSection', t => {
   }).catch(e => t.fail(e));
 
 
-  // Create third section with custom delimiters
+  // Create third section using glob
+  guide.createSection({
+    name: 'Glob',
+    srcFiles: 'test/*.css'
+  
+  }).then(section => {
+    t.looseEqual(section, [{name: 'First Style', usedFor: 'Stuff' }, { name: 'Second Style', usedFor: 'Other Stuff'}]);
+  
+  }).catch(e => t.fail(e));
+
+
+  // Create fourth section with custom delimiters
   guide.createSection({
     name: 'HTML Documentation',
     srcFiles: 'test/index.html',
