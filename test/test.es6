@@ -28,7 +28,7 @@ test('style-guide createSection', t => {
     srcFiles: 'test/main.css'
   
   }).then(section => {
-    t.looseEqual(section, [{name: 'First Style', usedFor: 'Stuff'}]);
+    t.looseEqual(section, [{name: 'First Style', usedFor: 'Stuff'}], 'Successfully creates a section');
   
   }).catch(e => t.fail(e));
 
@@ -39,7 +39,7 @@ test('style-guide createSection', t => {
     srcFiles: 'test/second.css'
   
   }).then(section => {
-    t.looseEqual(section, [{name: 'Second Style', usedFor: 'Other Stuff'}]);
+    t.looseEqual(section, [{name: 'Second Style', usedFor: 'Other Stuff'}], 'Successfully creates a second section');
   
   }).catch(e => t.fail(e));
 
@@ -50,7 +50,7 @@ test('style-guide createSection', t => {
     srcFiles: 'test/*.css'
   
   }).then(section => {
-    t.looseEqual(section, [{name: 'First Style', usedFor: 'Stuff' }, { name: 'Second Style', usedFor: 'Other Stuff'}]);
+    t.looseEqual(section, [{name: 'First Style', usedFor: 'Stuff' }, { name: 'Second Style', usedFor: 'Other Stuff'}], 'Successfully creates a section using glob');
   
   }).catch(e => t.fail(e));
 
@@ -66,7 +66,7 @@ test('style-guide createSection', t => {
       valueClosing: '\n\n',
     }
   }).then(section => {
-    t.looseEqual(section, [{name: 'HTML Thing', about: 'Description'}]);
+    t.looseEqual(section, [{name: 'HTML Thing', about: 'Description'}], 'Successfully creates a section with custom delimiters');
   
   }).catch(e => t.fail(e));
 
@@ -80,23 +80,41 @@ test('style-guide getters', t => {
   let guide = styleGuide();
 
   // Create first section
-  guide.createSection({
-    name: 'Base Styles',
-    srcFiles: 'test/main.css'
+  // guide.createSection({
+  //   name: 'Base Styles',
+  //   srcFiles: 'test/main.css'
   
-  }).then(section => {
-    t.looseEqual(guide.section('Base Styles'), [{name: 'First Style', usedFor: 'Stuff'}]);
+  // }).then(section => {
+  //   t.looseEqual(guide.section('Base Styles'), [{name: 'First Style', usedFor: 'Stuff'}], 'section(sectionName) gets a single section');
   
-  }).catch(e => t.fail(e));
+  // }).catch(e => t.fail(e));
 
   
   // Create second section
-  guide.createSection({
+  // guide.createSection({
+  //   name: 'Second Styles',
+  //   srcFiles: 'test/second.css'
+  
+  // }).then(section => {
+  //   t.looseEqual(guide.allSections(), {'Base Styles': [{name: 'First Style', usedFor: 'Stuff'}], 'Second Styles': [{name: 'Second Style', usedFor: 'Other Stuff'}]});
+  
+  // }).catch(e => t.fail(e));
+
+  let sectionOne = guide.createSection({
+    name: 'Base Styles',
+    srcFiles: 'test/main.css'
+  });
+
+  let sectionTwo = guide.createSection({
     name: 'Second Styles',
     srcFiles: 'test/second.css'
   
-  }).then(section => {
-    t.looseEqual(guide.allSections(), {'Base Styles': [{name: 'First Style', usedFor: 'Stuff'}], 'Second Styles': [{name: 'Second Style', usedFor: 'Other Stuff'}]});
+  });
+
+  Promise.all([sectionOne, sectionTwo])
+  .then(sections => {
+    t.looseEqual(guide.section('Base Styles'), [{name: 'First Style', usedFor: 'Stuff'}], 'section(sectionName) gets a single section');
+    t.looseEqual(guide.allSections(), {'Base Styles': [{name: 'First Style', usedFor: 'Stuff'}], 'Second Styles': [{name: 'Second Style', usedFor: 'Other Stuff'}]}, 'allSections() gets all sections');
   
   }).catch(e => t.fail(e));
 

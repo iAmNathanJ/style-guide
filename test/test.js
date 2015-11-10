@@ -32,7 +32,7 @@ var _2 = _interopRequireDefault(_);
     srcFiles: 'test/main.css'
 
   }).then(function (section) {
-    t.looseEqual(section, [{ name: 'First Style', usedFor: 'Stuff' }]);
+    t.looseEqual(section, [{ name: 'First Style', usedFor: 'Stuff' }], 'Successfully creates a section');
   })['catch'](function (e) {
     return t.fail(e);
   });
@@ -43,7 +43,7 @@ var _2 = _interopRequireDefault(_);
     srcFiles: 'test/second.css'
 
   }).then(function (section) {
-    t.looseEqual(section, [{ name: 'Second Style', usedFor: 'Other Stuff' }]);
+    t.looseEqual(section, [{ name: 'Second Style', usedFor: 'Other Stuff' }], 'Successfully creates a second section');
   })['catch'](function (e) {
     return t.fail(e);
   });
@@ -54,7 +54,7 @@ var _2 = _interopRequireDefault(_);
     srcFiles: 'test/*.css'
 
   }).then(function (section) {
-    t.looseEqual(section, [{ name: 'First Style', usedFor: 'Stuff' }, { name: 'Second Style', usedFor: 'Other Stuff' }]);
+    t.looseEqual(section, [{ name: 'First Style', usedFor: 'Stuff' }, { name: 'Second Style', usedFor: 'Other Stuff' }], 'Successfully creates a section using glob');
   })['catch'](function (e) {
     return t.fail(e);
   });
@@ -70,7 +70,7 @@ var _2 = _interopRequireDefault(_);
       valueClosing: '\n\n'
     }
   }).then(function (section) {
-    t.looseEqual(section, [{ name: 'HTML Thing', about: 'Description' }]);
+    t.looseEqual(section, [{ name: 'HTML Thing', about: 'Description' }], 'Successfully creates a section with custom delimiters');
   })['catch'](function (e) {
     return t.fail(e);
   });
@@ -82,23 +82,39 @@ var _2 = _interopRequireDefault(_);
   var guide = (0, _2['default'])();
 
   // Create first section
-  guide.createSection({
-    name: 'Base Styles',
-    srcFiles: 'test/main.css'
+  // guide.createSection({
+  //   name: 'Base Styles',
+  //   srcFiles: 'test/main.css'
 
-  }).then(function (section) {
-    t.looseEqual(guide.section('Base Styles'), [{ name: 'First Style', usedFor: 'Stuff' }]);
-  })['catch'](function (e) {
-    return t.fail(e);
-  });
+  // }).then(section => {
+  //   t.looseEqual(guide.section('Base Styles'), [{name: 'First Style', usedFor: 'Stuff'}], 'section(sectionName) gets a single section');
+
+  // }).catch(e => t.fail(e));
 
   // Create second section
-  guide.createSection({
+  // guide.createSection({
+  //   name: 'Second Styles',
+  //   srcFiles: 'test/second.css'
+
+  // }).then(section => {
+  //   t.looseEqual(guide.allSections(), {'Base Styles': [{name: 'First Style', usedFor: 'Stuff'}], 'Second Styles': [{name: 'Second Style', usedFor: 'Other Stuff'}]});
+
+  // }).catch(e => t.fail(e));
+
+  var sectionOne = guide.createSection({
+    name: 'Base Styles',
+    srcFiles: 'test/main.css'
+  });
+
+  var sectionTwo = guide.createSection({
     name: 'Second Styles',
     srcFiles: 'test/second.css'
 
-  }).then(function (section) {
-    t.looseEqual(guide.allSections(), { 'Base Styles': [{ name: 'First Style', usedFor: 'Stuff' }], 'Second Styles': [{ name: 'Second Style', usedFor: 'Other Stuff' }] });
+  });
+
+  Promise.all([sectionOne, sectionTwo]).then(function (sections) {
+    t.looseEqual(guide.section('Base Styles'), [{ name: 'First Style', usedFor: 'Stuff' }], 'section(sectionName) gets a single section');
+    t.looseEqual(guide.allSections(), { 'Base Styles': [{ name: 'First Style', usedFor: 'Stuff' }], 'Second Styles': [{ name: 'Second Style', usedFor: 'Other Stuff' }] }, 'allSections() gets all sections');
   })['catch'](function (e) {
     return t.fail(e);
   });
