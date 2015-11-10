@@ -48,11 +48,11 @@ export default function() {
       });
     },
 
-    getSection(name) {
+    section(name) {
       return sections[name];
     },
 
-    getAllSections() {
+    allSections() {
       return sections;
     }
 
