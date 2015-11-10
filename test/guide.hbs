@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Test Style Guide</title>
+  <title>{{title}}</title>
 </head>
 <body>
 
   <h1>{{title}}</h1>
 
   {{#each sections}}
-
     <section>
-      <h2>Name: {{name}}</h2>
-      <p><strong>Description:</strong> {{description}}</p>
-      <code>{{example}}</code>
+    
+      {{#each this}}
+        <h2>Name: {{name}}</h2>
+        <p><strong>Description:</strong> {{description}}</p>
+        <code>{{example}}</code>
+      {{/each}}
+    
     </section>
-
   {{/each}}
 
   {{> footer}}

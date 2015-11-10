@@ -35,10 +35,8 @@ var findFiles = function findFiles(filePattern) {
 exports['default'] = function () {
   var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-  var _ref$render = _ref.render;
-  var render = _ref$render === undefined ? function (template, context) {
-    var p = (0, _filePluck2['default'])();
-  } : _ref$render;
+  var _ref$title = _ref.title;
+  var title = _ref$title === undefined ? 'Style Guide' : _ref$title;
 
   var sections = {};
 
@@ -97,14 +95,26 @@ exports['default'] = function () {
       _handlebars2['default'].registerPartial(name, partial);
     },
 
-    compile: function compile(file, context) {
+    compile: function compile(file) {
 
       var template = _fs2['default'].readFileSync(file, 'utf8', function (err, fileContent) {
         if (err) return err;
         return fileContent;
       });
 
+      var context = {
+        title: title,
+        sections: sections
+      };
+
       return _handlebars2['default'].compile(template)(context);
+    },
+
+    make: function make(file, content) {
+      _fs2['default'].writeFileSync(file, content, 'utf8', function (err) {
+        if (err) console.error(err);
+        console.log('Success!');
+      });
     }
 
   };

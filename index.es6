@@ -15,9 +15,7 @@ let findFiles = (filePattern) => {
 
 export default function({
 
-  render = (template, context) => {
-    let p = filePluck();
-  }
+  title = 'Style Guide'
 
 } = {}) {
 
@@ -74,14 +72,26 @@ export default function({
       hbs.registerPartial(name, partial);
     },
 
-    compile(file, context) {
+    compile(file) {
       
       let template = fs.readFileSync(file, 'utf8', (err, fileContent) => {
         if(err) return err;
         return fileContent;
       });
+
+      let context = {
+        title: title,
+        sections: sections
+      };
       
       return hbs.compile(template)(context);
+    },
+
+    make(file, content) {
+      fs.writeFileSync(file, content, 'utf8', (err) => {
+        if(err) console.error(err);
+        console.log('Success!');
+      });
     }
 
   };
