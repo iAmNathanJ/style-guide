@@ -1,6 +1,7 @@
+import fs from 'fs';
 import filePluck from 'file-pluck';
 import glob from 'glob';
-import handlebars from 'handlebars';
+import hbs from 'handlebars';
 
 // Utility - file glob -> promise(array)
 let findFiles = (filePattern) => {
@@ -61,6 +62,26 @@ export default function({
 
     allSections() {
       return sections;
+    },
+
+    registerPartial(name, file) {
+
+      let partial = fs.readFileSync(file, 'utf8', (err, fileContent) => {
+        if(err) return err;
+        return fileContent;
+      });
+
+      hbs.registerPartial(name, partial);
+    },
+
+    compile(file, context) {
+      
+      let template = fs.readFileSync(file, 'utf8', (err, fileContent) => {
+        if(err) return err;
+        return fileContent;
+      });
+      
+      return hbs.compile(template)(context);
     }
 
   };

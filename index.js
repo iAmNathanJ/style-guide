@@ -6,6 +6,10 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _fs = require('fs');
+
+var _fs2 = _interopRequireDefault(_fs);
+
 var _filePluck = require('file-pluck');
 
 var _filePluck2 = _interopRequireDefault(_filePluck);
@@ -81,6 +85,26 @@ exports['default'] = function () {
 
     allSections: function allSections() {
       return sections;
+    },
+
+    registerPartial: function registerPartial(name, file) {
+
+      var partial = _fs2['default'].readFileSync(file, 'utf8', function (err, fileContent) {
+        if (err) return err;
+        return fileContent;
+      });
+
+      _handlebars2['default'].registerPartial(name, partial);
+    },
+
+    compile: function compile(file, context) {
+
+      var template = _fs2['default'].readFileSync(file, 'utf8', function (err, fileContent) {
+        if (err) return err;
+        return fileContent;
+      });
+
+      return _handlebars2['default'].compile(template)(context);
     }
 
   };
