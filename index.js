@@ -26,7 +26,8 @@ var findFiles = function findFiles(filePattern) {
 
 exports['default'] = function () {
 
-  var sections = {};
+  var sections = {},
+      render = function render(template, context) {};
 
   // Module
   return {

@@ -13,7 +13,10 @@ let findFiles = (filePattern) => {
 
 export default function() {
 
-  let sections = {};
+  let sections = {}
+    , render = (template, context) => {
+        
+      };
 
   // Module 
   return {
@@ -28,10 +31,6 @@ export default function() {
         closing: '***/',
         valueOpening: '{',
         valueClosing: '}'
-      },
-
-      render(template, context) {
-        
       }
 
     } = {}) {
