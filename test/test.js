@@ -75,3 +75,31 @@ var _2 = _interopRequireDefault(_);
     return t.fail(e);
   });
 });
+
+(0, _tape2['default'])('style-guide getters', function (t) {
+  t.plan(2);
+
+  var guide = (0, _2['default'])();
+
+  // Create first section
+  guide.createSection({
+    name: 'Base Styles',
+    srcFiles: 'test/main.css'
+
+  }).then(function (section) {
+    t.looseEqual(guide.section('Base Styles'), [{ name: 'First Style', usedFor: 'Stuff' }]);
+  })['catch'](function (e) {
+    return t.fail(e);
+  });
+
+  // Create second section
+  guide.createSection({
+    name: 'Second Styles',
+    srcFiles: 'test/second.css'
+
+  }).then(function (section) {
+    t.looseEqual(guide.allSections(), { 'Base Styles': [{ name: 'First Style', usedFor: 'Stuff' }], 'Second Styles': [{ name: 'Second Style', usedFor: 'Other Stuff' }] });
+  })['catch'](function (e) {
+    return t.fail(e);
+  });
+});

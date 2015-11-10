@@ -6,8 +6,6 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError('Cannot destructure undefined'); }
-
 var _filePluck = require('file-pluck');
 
 var _filePluck2 = _interopRequireDefault(_filePluck);
@@ -27,9 +25,6 @@ var findFiles = function findFiles(filePattern) {
 };
 
 exports['default'] = function () {
-  var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-  _objectDestructuringEmpty(_ref);
 
   var sections = {};
 
@@ -37,21 +32,21 @@ exports['default'] = function () {
   return {
 
     createSection: function createSection() {
-      var _ref2 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+      var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-      var _ref2$name = _ref2.name;
-      var name = _ref2$name === undefined ? null : _ref2$name;
-      var _ref2$srcFiles = _ref2.srcFiles;
-      var srcFiles = _ref2$srcFiles === undefined ? null : _ref2$srcFiles;
-      var _ref2$delimiters = _ref2.delimiters;
+      var _ref$name = _ref.name;
+      var name = _ref$name === undefined ? null : _ref$name;
+      var _ref$srcFiles = _ref.srcFiles;
+      var srcFiles = _ref$srcFiles === undefined ? null : _ref$srcFiles;
+      var _ref$delimiters = _ref.delimiters;
       var // Glob
 
-      delimiters = _ref2$delimiters === undefined ? {
+      delimiters = _ref$delimiters === undefined ? {
         opening: '/***',
         closing: '***/',
         valueOpening: '{',
         valueClosing: '}'
-      } : _ref2$delimiters;
+      } : _ref$delimiters;
 
       if (!name) return new Error('No name set on createSection');
       if (!srcFiles) return new Error('No source file(s) specified on createSection');
@@ -70,11 +65,11 @@ exports['default'] = function () {
       });
     },
 
-    getSection: function getSection(name) {
+    section: function section(name) {
       return sections[name];
     },
 
-    getAllSections: function getAllSections() {
+    allSections: function allSections() {
       return sections;
     }
 

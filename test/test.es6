@@ -1,6 +1,8 @@
 import test from 'tape';
 import styleGuide from '../';
 
+
+
 test('style-guide should be a thing', t => {
 
   let guide = styleGuide();
@@ -9,6 +11,8 @@ test('style-guide should be a thing', t => {
   t.end();
 
 });
+
+
 
 test('style-guide createSection', t => {
 
@@ -63,6 +67,36 @@ test('style-guide createSection', t => {
     }
   }).then(section => {
     t.looseEqual(section, [{name: 'HTML Thing', about: 'Description'}]);
+  
+  }).catch(e => t.fail(e));
+
+});
+
+
+
+test('style-guide getters', t => {
+  t.plan(2);
+
+  let guide = styleGuide();
+
+  // Create first section
+  guide.createSection({
+    name: 'Base Styles',
+    srcFiles: 'test/main.css'
+  
+  }).then(section => {
+    t.looseEqual(guide.section('Base Styles'), [{name: 'First Style', usedFor: 'Stuff'}]);
+  
+  }).catch(e => t.fail(e));
+
+  
+  // Create second section
+  guide.createSection({
+    name: 'Second Styles',
+    srcFiles: 'test/second.css'
+  
+  }).then(section => {
+    t.looseEqual(guide.allSections(), {'Base Styles': [{name: 'First Style', usedFor: 'Stuff'}], 'Second Styles': [{name: 'Second Style', usedFor: 'Other Stuff'}]});
   
   }).catch(e => t.fail(e));
 
