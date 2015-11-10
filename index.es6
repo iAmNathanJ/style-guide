@@ -28,6 +28,10 @@ export default function() {
         closing: '***/',
         valueOpening: '{',
         valueClosing: '}'
+      },
+
+      render(template, context) {
+        
       }
 
     } = {}) {
