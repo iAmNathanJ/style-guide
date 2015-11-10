@@ -7,6 +7,10 @@
     "type": "git",
     "url": "iAmNathanJ/style-guide"
   },
+  "bugs": {
+    "url": "https://github.com/iAmNathanJ/style-guide/issues",
+    "email": "hello@iamnathanj.com"
+  },
   "main": "index.js",
   "scripts": {
     "compile-module": "babel index.es6 -o index.js",
