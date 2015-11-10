@@ -1,7 +1,8 @@
 import filePluck from 'file-pluck';
 import glob from 'glob';
+import handlebars from 'handlebars';
 
-// Utility - Get promise(glob)
+// Utility - file glob -> promise(array)
 let findFiles = (filePattern) => {
   return new Promise((resolve, reject) => {
     glob(filePattern, {}, (err, filesArray) => {
@@ -11,12 +12,15 @@ let findFiles = (filePattern) => {
   });
 };
 
-export default function() {
+export default function({
 
-  let sections = {}
-    , render = (template, context) => {
-        
-      };
+  render = (template, context) => {
+    let p = filePluck();
+  }
+
+} = {}) {
+
+  let sections = {};
 
   // Module 
   return {

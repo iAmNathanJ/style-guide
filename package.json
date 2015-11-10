@@ -23,11 +23,12 @@
   },
   "devDependencies": {
     "babel": "^5.8.29",
-    "file-pluck": "^0.4.0",
     "tap-spec": "^4.1.0",
     "tape": "^4.2.2"
   },
   "dependencies": {
-    "glob": "^5.0.15"
+    "file-pluck": "^0.4.0",
+    "glob": "^5.0.15",
+    "handlebars": "^4.0.4"
   }
 }

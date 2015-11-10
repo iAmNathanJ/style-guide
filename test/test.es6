@@ -79,27 +79,6 @@ test('style-guide getters', t => {
 
   let guide = styleGuide();
 
-  // Create first section
-  // guide.createSection({
-  //   name: 'Base Styles',
-  //   srcFiles: 'test/main.css'
-  
-  // }).then(section => {
-  //   t.looseEqual(guide.section('Base Styles'), [{name: 'First Style', usedFor: 'Stuff'}], 'section(sectionName) gets a single section');
-  
-  // }).catch(e => t.fail(e));
-
-  
-  // Create second section
-  // guide.createSection({
-  //   name: 'Second Styles',
-  //   srcFiles: 'test/second.css'
-  
-  // }).then(section => {
-  //   t.looseEqual(guide.allSections(), {'Base Styles': [{name: 'First Style', usedFor: 'Stuff'}], 'Second Styles': [{name: 'Second Style', usedFor: 'Other Stuff'}]});
-  
-  // }).catch(e => t.fail(e));
-
   let sectionOne = guide.createSection({
     name: 'Base Styles',
     srcFiles: 'test/main.css'
