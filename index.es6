@@ -11,9 +11,7 @@ let findFiles = (filePattern) => {
   });
 };
 
-export default function({
-  
-} = {}) {
+export default function() {
 
   let sections = {};
 
