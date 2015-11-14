@@ -1,17 +1,6 @@
 import fs from 'fs';
 import filePluck from 'file-pluck';
-import glob from 'glob';
 import hbs from 'handlebars';
-
-// Utility - file glob -> promise(array)
-let findFiles = (filePattern) => {
-  return new Promise((resolve, reject) => {
-    glob(filePattern, {}, (err, filesArray) => {
-      if(err) reject(err);
-      resolve(filesArray);
-    });
-  });
-};
 
 export default function({
 
@@ -44,10 +33,9 @@ export default function({
       let p = filePluck(delimiters);
       
       return new Promise((resolve, reject) => {
-        findFiles(srcFiles)
-        .then(files => p.pluckFiles(files) )
+        p.pluckFile(srcFiles)
         .then(snippets => {
-          sections[name] = p.pairUp(snippets);
+          sections[name] = p.objectify(snippets);
           resolve(sections[name]);
         })
         .catch(e => reject(e));

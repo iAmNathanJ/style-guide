@@ -1,0 +1,56 @@
+/***
+
+name { Headings }
+
+description { Description of the <h1> to <h6> tags. }
+
+example {
+
+<h1>Heading</h1>
+<h2>Heading</h2>
+<h3>Heading</h3>
+<h4>Heading</h4>
+<h5>Heading</h5>
+<h6>Heading</h6>
+
+}
+
+code {
+
+<h1>Heading</h1>
+
+}
+
+***/
+
+h1, h2, h3, h4, h5, h6 {
+  color: red;
+}
+
+/***
+
+name { Anchors }
+
+description { Description of the <a> tags. }
+
+example {
+
+<a href="#">This is a link</a>
+
+}
+
+code {
+
+<a href="#">This is a link.</a>
+
+}
+
+***/
+
+a {
+  color: blue;
+}
+
+a:hover {
+  color: green;
+}

@@ -31,7 +31,7 @@
     "tape": "^4.2.2"
   },
   "dependencies": {
-    "file-pluck": "^0.4.0",
+    "file-pluck": "^0.6.1",
     "glob": "^5.0.15",
     "handlebars": "^4.0.4"
   }

@@ -1,0 +1,67 @@
+/***
+
+name { Card }
+
+description { This is the description of the .card class }
+
+example {
+
+<div class="card">
+  <p>
+    Literally direct trade 8-bit, poutine health goth tumblr offal leggings. YOLO quinoa fanny pack, fashion axe squid yuccie iPhone vegan street art tumblr. Tattooed tumblr pop-up viral literally.
+  </p>
+</div>
+
+}
+
+code {
+
+<div class="card">
+  <p>
+    Literally direct trade 8-bit, poutine health goth tumblr offal leggings. YOLO quinoa fanny pack, fashion axe squid yuccie iPhone vegan street art tumblr. Tattooed tumblr pop-up viral literally.
+  </p>
+</div>
+
+}
+
+***/
+
+.card {
+  display: inline-block;
+  background: #fff;
+  border: 5px solid #efefef;
+  box-shadow: 0 0 5px 0 #333;
+}
+
+/***
+
+name { Full Width }
+
+description { This is the description of the .full-width class }
+
+example {
+
+<div class="full-width">
+  <p>
+    Literally direct trade 8-bit, poutine health goth tumblr offal leggings. YOLO quinoa fanny pack, fashion axe squid yuccie iPhone vegan street art tumblr. Tattooed tumblr pop-up viral literally.
+  </p>
+</div>
+
+}
+
+code {
+
+<div class="full-width">
+  <p>
+    Literally direct trade 8-bit, poutine health goth tumblr offal leggings. YOLO quinoa fanny pack, fashion axe squid yuccie iPhone vegan street art tumblr. Tattooed tumblr pop-up viral literally.
+  </p>
+</div>
+
+}
+
+***/
+
+.full-width {
+  display: block;
+  width: 100%;
+}
